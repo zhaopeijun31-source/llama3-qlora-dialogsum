@@ -64,8 +64,8 @@ This project started from a tutorial written for Llama-2 on a 24 GB GPU. Running
 
 | Problem | Cause | Fix |
 |---|---|---|
-| Fine-tuned model never stops generating | `add_eos_token=True` is ignored by Llama-3's tokenizer, so training texts had no EOS | Append `<|eot_id|>` to each training text explicitly |
-| EOS would be excluded from the loss | `pad_token` was set to the EOS token; the collator masks pad tokens | Use `<|end_of_text|>` as a separate pad token |
+| Fine-tuned model never stops generating | `add_eos_token=True` is ignored by Llama-3's tokenizer, so training texts had no EOS | Append `<\|eot_id\|>` to each training text explicitly |
+| EOS would be excluded from the loss | `pad_token` was set to the EOS token; the collator masks pad tokens | Use `<\|end_of_text\|>` as a separate pad token |
 | Train/inference prompt mismatch | Different prompt templates were used for training and testing | One `make_prompt()` function shared by both |
 | OOM during training (tried to allocate 1.96 GiB) | `prepare_model_for_kbit_training` casts embedding and `lm_head` to fp32; with Llama-3's 128k vocabulary each is 128256 × 4096 × 4 B = 1.96 GiB | Skip it; enable gradient checkpointing and input gradients manually |
 | OOM at evaluation | `per_device_eval_batch_size` defaults to 8 | Set to 1 |
