@@ -1,0 +1,13 @@
+{
+  "n_eval": 100,
+  "baseline": {
+    "rouge1": 0.2097,
+    "rouge2": 0.0692,
+    "rougeL": 0.1662
+  },
+  "fine_tuned": {
+    "rouge1": 0.4846,
+    "rouge2": 0.2093,
+    "rougeL": 0.399
+  }
+}
